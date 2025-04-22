@@ -19,26 +19,27 @@ public class DeploymentService {
     private final StorageService storageService;
     private final ObjectMapper objectMapper;
 
-    public void deploy(String packageName, String version, MultipartFile packageFile,MultipartFile metaFile) throws IOException {
+    public void deploy(String packageName, String version, MultipartFile packageFile, MultipartFile metaFile) throws IOException {
 
-        MetaJsonDTO meta = objectMapper.readValue(metaFile.getBytes(),MetaJsonDTO.class);
+        MetaJsonDTO meta = objectMapper.readValue(metaFile.getBytes(), MetaJsonDTO.class);
 
         if (!packageName.equals(meta.getName()) || !version.equals(meta.getVersion())) {
             throw new IllegalArgumentException("Path and meta.json version/name mismatch");
         }
 
         String basePath = packageName + "/" + version;
-        String packagePath = storageService.store(basePath+ "/package.rep", packageFile.getInputStream());
+        String packagePath = storageService.store(basePath + "/package.rep", packageFile.getInputStream());
         String metaPath = storageService.store(basePath + "/meta.json", metaFile.getInputStream());
+
+
+        PackageMetadata entity = new PackageMetadata();
+        entity.setName(meta.getName());
+        entity.setVersion(meta.getVersion());
+        entity.setAuthor(meta.getAuthor());
+        entity.setDependencies(meta.getDependencies());
+        entity.setFilePath(packagePath);
+        entity.setMetaPath(metaPath);
+
+        repository.save(entity);
     }
-
-    PackageMetadata entity = new PackageMetadata();
-    entity.setName(meta.getName());
-    entity.setVersion(meta.getVersion());
-    entity.setAuthor(meta.getAuthor());
-    entity.setDependencies(meta.getDependencies());
-    entity.setFilePath(packagePath);
-    entity.setMetaPath(metaPath);
-
-    repository.save(entity)
 }
