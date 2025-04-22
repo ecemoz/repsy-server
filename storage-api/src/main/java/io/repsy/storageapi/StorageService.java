@@ -1,4 +1,4 @@
-package io.repsy.repository.storage;
+package io.repsy.storageapi;
 
 import java.io.IOException;
 import java.io.InputStream;

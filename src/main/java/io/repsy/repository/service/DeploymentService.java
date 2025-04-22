@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.repsy.repository.dto.MetaJsonDTO;
 import io.repsy.repository.model.PackageMetadata;
 import io.repsy.repository.repository.PackageMetadataRepository;
-import io.repsy.repository.storage.StorageService;
+import io.repsy.storageapi.StorageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

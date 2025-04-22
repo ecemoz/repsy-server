@@ -1,6 +1,6 @@
-package io.repsy.repository.storage.filesystem;
+package io.repsy.storagefilesystem.filesystem;
 
-import io.repsy.repository.storage.StorageService;
+import io.repsy.storageapi.StorageService;
 import org.springframework.stereotype.Service;
 import java.io.*;
 

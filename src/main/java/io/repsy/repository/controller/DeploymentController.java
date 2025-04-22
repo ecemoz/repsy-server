@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/{packageName/version")
+@RequestMapping("/{packageName}/{version}")
 public class DeploymentController {
 
     private final DeploymentService deploymentService;
