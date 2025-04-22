@@ -59,4 +59,20 @@
 
     </dependencies>
 
+    <distributionManagement>
+        <repository>
+            <id>repsy</id>
+            <name>My Private Maven Repository on Repsy</name>
+            <url>https://repo.repsy.io/mvn/ecemnurozen/objectstorage</url>
+        </repository>
+    </distributionManagement>
+    <repositories>
+        <repository>
+            <id>repsy</id>
+            <name>My Private Maven Repository on Repsy</name>
+            <url>https://repsy.io/ecemnurozen/maven/objectstorage</url>
+        </repository>
+    </repositories>
+
+
 </project>

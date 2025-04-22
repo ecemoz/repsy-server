@@ -58,16 +58,7 @@
             <artifactId>storage-api</artifactId>
             <version>1.0.0</version>
         </dependency>
-        <dependency>
-            <groupId>io.repsy</groupId>
-            <artifactId>storage-filesystem</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.repsy</groupId>
-            <artifactId>storage-objectstorage</artifactId>
-            <version>1.0.0</version>
-        </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -95,4 +86,17 @@
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <id>repsy-filesystem</id>
+            <name>Repsy Filesystem</name>
+            <url>https://repo.repsy.io/mvn/ecemnurozen/filesystem</url>
+        </repository>
+        <repository>
+            <id>repsy-objectstorage</id>
+            <name>Repsy ObjectStorage</name>
+            <url>https://repo.repsy.io/mvn/ecemnurozen/objectstorage</url>
+        </repository>
+    </repositories>
 </project>

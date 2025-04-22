@@ -64,4 +64,19 @@
             </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>repsy</id>
+            <name>My Private Maven Repository on Repsy</name>
+            <url>https://repo.repsy.io/mvn/ecemnurozen/filesystem</url>
+        </repository>
+    </distributionManagement>
+    <repositories>
+        <repository>
+            <id>repsy</id>
+            <url>https://repo.repsy.io/mvn/ecemnurozen/filesystem</url>
+        </repository>
+    </repositories>
+
 </project>
