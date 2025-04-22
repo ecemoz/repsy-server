@@ -1,127 +1,109 @@
 
 ![image](https://github.com/user-attachments/assets/fc5970bd-09a5-45ac-bd25-93051281c8bd)
-# Repsy - Junior FullStack Developer Assignment 
+# Repsy Package Repository Backend
 
+This project is a backend system designed for handling package deployment and download operations, with pluggable storage strategies using the Strategy Design Pattern.
 
-This project is a solution to the **Junior FullStack Developer Assignment**. It includes a modular Spring Boot application with a PostgreSQL backend and two interchangeable storage strategies (FileSystem and MinIO Object Storage).
+## 📦 Features
+- Deploy and download `.rep` package files and accompanying `meta.json` metadata.
+- Modular storage layer: file system and object storage (MinIO) implementations.
+- PostgreSQL database integration to persist metadata.
+- Two REST endpoints: `POST /{packageName}/{version}` and `GET /{packageName}/{version}/{fileName}`.
+- Docker Compose setup for seamless local development.
+- Maven multi-module architecture.
+- Libraries deployed to Repsy private Maven repository.
 
----
-
-## 🚀 Features
-
-- Java 17 + Spring Boot 3.2.5
-- PostgreSQL for package metadata
-- Docker Compose setup (MinIO + PostgreSQL)
-- Two REST endpoints:
-  - Deployment (`POST /{packageName}/{version}`)
-  - Download (`GET /{packageName}/{version}/{fileName}`)
-- Strategy Pattern for storage (via `storage-api`)
-- Developer-friendly setup (no manual installations required)
-- Proper validation and exception handling
-- Maven multi-module structure, Repsy-compatible
-- Clean and documented codebase
-
----
-
-## 📦 Project Structure
-
+## 📂 Module Structure
 ```
 repsy-server/
-├── core/                    # Main Spring Boot backend
-├── storage-api/            # Shared StorageService interface
-├── storage-filesystem/     # File system-based implementation
-├── storage-objectstorage/  # MinIO object storage implementation
-├── docker-compose.yml      # Service setup (Postgres + MinIO)
-└── README.md
+├── core/                      # Main Spring Boot application
+├── storage-api/              # Storage interface
+├── storage-filesystem/       # Filesystem implementation
+├── storage-objectstorage/    # MinIO (object storage) implementation
+└── docker-compose.yml        # Local development setup
 ```
 
----
+## 🚀 Running Locally
 
-## 🐳 Running with Docker
+### Prerequisites
+- Java 17
+- Maven
+- Docker + Docker Compose
 
-1. Clone the repo:
-
+### Start with Docker
 ```bash
-git clone https://github.com/yourname/repsy-server.git
-cd repsy-server
+docker-compose up --build
+```
+This will start PostgreSQL, MinIO, and the Spring Boot app on port `8080`.
+
+### Application Endpoints
+
+#### Deploy a Package
+```
+POST /{packageName}/{version}
+Multipart Form Data:
+- packageFile: your .rep file
+- metafile: your meta.json file
 ```
 
-2. Start services:
+#### Download a Package or Meta File
+```
+GET /{packageName}/{version}/{fileName}
+```
 
+## 🔐 MinIO Configuration
+MinIO runs on `http://localhost:9000`
+- Access Key: `minioadmin`
+- Secret Key: `minioadmin`
+
+## 🧪 Testing
+Run tests with:
 ```bash
-docker-compose up -d
+mvn clean test
 ```
 
-3. Run the app:
+## 📥 Deploying Libraries to Repsy
 
+1. Configure `~/.m2/settings.xml`:
+```xml
+<settings>
+  <servers>
+    <server>
+      <id>repsy</id>
+      <username>ecemnurozen</username>
+      <password>[your-password]</password>
+    </server>
+  </servers>
+</settings>
+```
+
+2. Add to each module's `pom.xml`:
+```xml
+<distributionManagement>
+  <repository>
+    <id>repsy</id>
+    <name>Repsy Private Repo</name>
+    <url>https://repo.repsy.io/mvn/ecemnurozen/[repo-name]</url>
+  </repository>
+</distributionManagement>
+```
+
+3. Deploy:
 ```bash
-cd core
-mvn spring-boot:run
+mvn clean deploy
 ```
 
----
-
-## 📮 API Reference
-
-### Deploy Package
-
-**POST** `/{packageName}/{version}`  
-Content-Type: `multipart/form-data`
-
-Fields:
-- `packageFile`: `.rep` file
-- `metaFile`: `meta.json` file
-
-### Download Package
-
-**GET** `/{packageName}/{version}/{fileName}`
-
-Returns file stream (supports `.rep` or `.json`).
+## ✅ Acceptance Criteria Checklist
+- [x] Spring Boot REST API in Java 17
+- [x] 2 Endpoints for deploy/download
+- [x] PostgreSQL integration
+- [x] MinIO-based object storage
+- [x] Repsy deployment for libraries
+- [x] Docker Compose for developer-friendliness
+- [x] Clean commit history
+- [x] Robust input validation
 
 ---
 
-## 🧠 Storage Strategy Pattern
-
-We defined `StorageService` in `storage-api` and implemented:
-- `FileSystemStorageService` in `storage-filesystem`
-- `MinioStorageService` in `storage-objectstorage`
-
-You can switch between them by importing the right implementation into `core`.
-
----
-
-## ✅ Acceptance Criteria
-
-| Criteria | Status |
-|---------|--------|
-| Spring Boot app (Java LTS) | ✅ |
-| PostgreSQL usage | ✅ |
-| 2 REST endpoints | ✅ |
-| Repsy-ready Maven libs | ✅ |
-| FileSystem + MinIO impl. | ✅ |
-| Docker-based local setup | ✅ |
-| Input validation & errors | ✅ |
-| Clean commit history | ✅ |
-| README & developer docs | ✅ |
-
----
-
-## 🧪 Potential Improvements
-
-- Auth middleware (JWT)
-- Upload/download size limits
-- Unit/integration test coverage
-- Metrics endpoint (Prometheus-ready)
-
----
-
-## 👤 Author
-
-Developed as part of Repsy’s Junior FullStack Developer Assignment  
-Date: April 23, 2025
-
----
-
-## 🪪 License
-
-MIT
+**Author:** Ecem Nur Özen  
+**Position:** Junior Full Stack Developer Assignment – Repsy
