@@ -1,5 +1,7 @@
 
-# Repsy - Junior FullStack Developer Assignment
+![image](https://github.com/user-attachments/assets/fc5970bd-09a5-45ac-bd25-93051281c8bd)
+# Repsy - Junior FullStack Developer Assignment 
+
 
 This project is a solution to the **Junior FullStack Developer Assignment**. It includes a modular Spring Boot application with a PostgreSQL backend and two interchangeable storage strategies (FileSystem and MinIO Object Storage).
 
